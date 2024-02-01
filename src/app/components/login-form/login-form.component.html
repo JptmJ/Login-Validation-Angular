@@ -1,0 +1,40 @@
+<div class="container center-div">
+    <form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="border p-5 mt-4 w-100">
+        <div class="title w-25">
+            <h4 class="form-title">Log In</h4>
+            <hr>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="Inputname">Username</label>
+            <input type="text" class="form-control" id="Inputname" formControlName="username">
+            <span *ngIf="validateForm.get('username')?.hasError('required') && submitted">Username is required</span>
+            <span *ngIf="validateForm.get('username')?.hasError('minlength') && submitted">Username must be at least 3
+                characters</span>
+            <span *ngIf="validateForm.get('username')?.hasError('maxlength') && submitted">Username cannot exceed 10
+                characters</span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="InputEmail">Email address</label>
+            <input type="email" class="form-control" id="InputEmail" formControlName="useremail">
+            <span *ngIf="validateForm.get('useremail')?.hasError('required') && submitted">Email is
+                required</span>
+            <span *ngIf="validateForm.get('useremail')?.hasError('email') && submitted">Invalid
+                Email</span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="InputPassword">Password</label>
+            <input type="password" class="form-control" id="InputPassword" formControlName="userpass">
+            <span *ngIf="validateForm.get('userpass')?.hasError('required') && submitted">Password is
+                required</span>
+            <span *ngIf="validateForm.get('userpass')?.hasError('pattern') && submitted">Invalid password
+                format</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div class="pt-4" *ngIf="submitted && validateForm.valid">
+        <p>Username: {{validateForm.value.username}}</p>
+        <p>User Email: {{validateForm.value.useremail}}</p>
+        <p>User Password: {{validateForm.value.userpass}}</p>
+    </div>
+</div>
